@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supprimer mon compte - Duoly</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <span class="logo-icon">💕</span>
+                <span class="logo-text">Duoly</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html#features">Fonctionnalites</a></li>
+                <li><a href="support.html">Support</a></li>
+                <li><a href="privacy.html">Confidentialite</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="page-header">
+        <div class="container">
+            <h1>Supprimer mon compte</h1>
+            <p>Nous sommes tristes de vous voir partir</p>
+        </div>
+    </header>
+
+    <section class="content-section">
+        <div class="container">
+            <div class="alert alert-warning">
+                <strong>Attention :</strong> La suppression de votre compte est irreversible. Toutes vos donnees
+                seront definitivement effacees et ne pourront pas etre recuperees.
+            </div>
+
+            <h2>Ce qui sera supprime</h2>
+            <p>La suppression de votre compte entrainera l'effacement permanent de :</p>
+            <ul>
+                <li>Votre profil et toutes vos informations personnelles</li>
+                <li>Votre historique d'humeurs</li>
+                <li>Vos echanges et messages partages</li>
+                <li>Vos objectifs et leur progression</li>
+                <li>Vos taches et listes</li>
+                <li>Vos evenements du calendrier</li>
+                <li>Toutes les donnees associees a votre compte</li>
+            </ul>
+
+            <h2>Impact sur votre partenaire</h2>
+            <p>
+                Si vous etes lie a un partenaire dans l'application, la suppression de votre compte :
+            </p>
+            <ul>
+                <li>Supprimera le lien avec votre partenaire</li>
+                <li>Effacera vos contributions aux donnees partagees</li>
+                <li>Votre partenaire conservera ses propres donnees personnelles</li>
+            </ul>
+
+            <h2>Comment supprimer votre compte</h2>
+
+            <div class="card">
+                <h3 style="margin-bottom: 1rem;">Option 1 : Depuis l'application</h3>
+                <ol style="color: var(--text-secondary); padding-left: 1.5rem;">
+                    <li>Ouvrez l'application Duoly</li>
+                    <li>Allez dans Parametres (icone engrenage)</li>
+                    <li>Faites defiler jusqu'a "Compte"</li>
+                    <li>Appuyez sur "Supprimer mon compte"</li>
+                    <li>Confirmez votre decision</li>
+                </ol>
+            </div>
+
+            <div class="card">
+                <h3 style="margin-bottom: 1rem;">Option 2 : Par email</h3>
+                <p style="color: var(--text-secondary);">
+                    Si vous ne pouvez pas acceder a votre compte ou si vous rencontrez des difficultes,
+                    envoyez-nous un email a <a href="mailto:support@novalys.io">support@novalys.io</a> avec :
+                </p>
+                <ul style="color: var(--text-secondary);">
+                    <li>L'objet : "Demande de suppression de compte"</li>
+                    <li>L'adresse email associee a votre compte</li>
+                    <li>Votre nom d'utilisateur (si vous le connaissez)</li>
+                </ul>
+                <p style="color: var(--text-secondary); margin-top: 1rem;">
+                    Nous traiterons votre demande dans un delai de 72 heures.
+                </p>
+            </div>
+
+            <h2>Formulaire de demande de suppression</h2>
+            <p>
+                Vous pouvez egalement utiliser le formulaire ci-dessous pour demander la suppression de votre compte :
+            </p>
+
+            <form action="https://formspree.io/f/your-form-id" method="POST" class="card" style="margin-top: 1rem;">
+                <div class="form-group">
+                    <label for="email">Adresse email de votre compte *</label>
+                    <input type="email" id="email" name="email" required placeholder="votre@email.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="username">Nom d'utilisateur (optionnel)</label>
+                    <input type="text" id="username" name="username" placeholder="Votre nom d'utilisateur">
+                </div>
+
+                <div class="form-group">
+                    <label for="reason">Raison de la suppression (optionnel)</label>
+                    <select id="reason" name="reason">
+                        <option value="">Selectionnez une raison</option>
+                        <option value="no-longer-needed">Je n'ai plus besoin de l'application</option>
+                        <option value="privacy-concerns">Preoccupations concernant la vie privee</option>
+                        <option value="found-alternative">J'ai trouve une alternative</option>
+                        <option value="relationship-ended">Ma relation a pris fin</option>
+                        <option value="technical-issues">Problemes techniques</option>
+                        <option value="other">Autre raison</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="comments">Commentaires additionnels (optionnel)</label>
+                    <textarea id="comments" name="comments" placeholder="Dites-nous comment nous pourrions nous ameliorer..."></textarea>
+                </div>
+
+                <input type="hidden" name="_subject" value="Demande de suppression de compte Duoly">
+
+                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                    Demander la suppression de mon compte
+                </button>
+            </form>
+
+            <div class="alert alert-info" style="margin-top: 2rem;">
+                <strong>Delai de traitement :</strong> Votre demande sera traitee dans un delai maximum de 72 heures.
+                Vous recevrez un email de confirmation une fois votre compte supprime.
+            </div>
+
+            <h2>Vous avez change d'avis ?</h2>
+            <p>
+                Si vous souhaitez simplement faire une pause, vous pouvez vous deconnecter de l'application
+                sans supprimer votre compte. Vos donnees seront conservees et vous pourrez vous reconnecter
+                a tout moment.
+            </p>
+            <p>
+                Si vous rencontrez des problemes avec l'application, notre equipe support est la pour vous aider.
+                <a href="support.html">Contactez-nous</a> avant de prendre une decision definitive.
+            </p>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="logo-icon">💕</span>
+                    <span class="logo-text">Duoly</span>
+                    <p>Avancez ensemble, chaque jour.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Application</h4>
+                        <ul>
+                            <li><a href="index.html#features">Fonctionnalites</a></li>
+                            <li><a href="#">Telechargement</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Legal</h4>
+                        <ul>
+                            <li><a href="privacy.html">Politique de confidentialite</a></li>
+                            <li><a href="delete-account.html">Supprimer mon compte</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Support</h4>
+                        <ul>
+                            <li><a href="support.html">Centre d'aide</a></li>
+                            <li><a href="support.html#contact">Nous contacter</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Novalys. Tous droits reserves.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

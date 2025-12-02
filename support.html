@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support - Duoly</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <span class="logo-icon">💕</span>
+                <span class="logo-text">Duoly</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html#features">Fonctionnalites</a></li>
+                <li><a href="support.html">Support</a></li>
+                <li><a href="privacy.html">Confidentialite</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="page-header">
+        <div class="container">
+            <h1>Centre d'aide</h1>
+            <p>Nous sommes la pour vous aider</p>
+        </div>
+    </header>
+
+    <section class="content-section">
+        <div class="container">
+            <h2>Questions frequentes</h2>
+
+            <div class="card">
+                <h3>Comment inviter mon partenaire ?</h3>
+                <p style="color: var(--text-secondary);">
+                    Dans l'application, allez dans "Mon couple" puis appuyez sur "Inviter mon partenaire".
+                    Vous pouvez partager le lien d'invitation par SMS, email ou toute autre application de messagerie.
+                    Votre partenaire devra telecharger l'application et utiliser ce lien pour rejoindre votre espace couple.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>Comment modifier mon humeur du jour ?</h3>
+                <p style="color: var(--text-secondary);">
+                    Depuis le tableau de bord, appuyez sur la carte "Mon humeur" ou sur l'icone d'humeur en haut de l'ecran.
+                    Selectionnez l'emoji qui represente le mieux votre etat actuel. Vous pouvez modifier votre humeur
+                    autant de fois que vous le souhaitez dans la journee.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>Mes donnees sont-elles securisees ?</h3>
+                <p style="color: var(--text-secondary);">
+                    Oui, la securite de vos donnees est notre priorite. Toutes les communications sont chiffrees
+                    (HTTPS/TLS), vos mots de passe sont securises avec bcrypt, et vos donnees sont stockees sur des
+                    serveurs securises dans l'Union Europeenne. Pour plus de details, consultez notre
+                    <a href="privacy.html">politique de confidentialite</a>.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>Comment creer un objectif de couple ?</h3>
+                <p style="color: var(--text-secondary);">
+                    Allez dans l'onglet "Objectifs" et appuyez sur le bouton "+". Definissez un titre pour votre objectif,
+                    ajoutez une description optionnelle, et selectionnez une date cible si vous le souhaitez.
+                    Vous et votre partenaire pourrez suivre la progression ensemble.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>Puis-je utiliser l'application hors ligne ?</h3>
+                <p style="color: var(--text-secondary);">
+                    L'application necessite une connexion internet pour synchroniser les donnees avec votre partenaire.
+                    Cependant, certaines fonctionnalites de base restent accessibles hors ligne, et les modifications
+                    seront synchronisees automatiquement des que vous serez reconnecte.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>Comment supprimer mon compte ?</h3>
+                <p style="color: var(--text-secondary);">
+                    Vous pouvez supprimer votre compte depuis les Parametres de l'application ou en suivant les
+                    instructions sur notre page <a href="delete-account.html">Supprimer mon compte</a>.
+                    Attention : cette action est irreversible.
+                </p>
+            </div>
+
+            <h2 id="contact">Nous contacter</h2>
+            <p>
+                Vous n'avez pas trouve la reponse a votre question ? Notre equipe est la pour vous aider.
+                Remplissez le formulaire ci-dessous et nous vous repondrons dans les plus brefs delais.
+            </p>
+
+            <form action="https://formspree.io/f/your-form-id" method="POST" class="card" style="margin-top: 1rem;">
+                <div class="form-group">
+                    <label for="name">Votre nom *</label>
+                    <input type="text" id="name" name="name" required placeholder="Jean Dupont">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Votre email *</label>
+                    <input type="email" id="email" name="email" required placeholder="jean@exemple.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="subject">Sujet *</label>
+                    <select id="subject" name="subject" required>
+                        <option value="">Selectionnez un sujet</option>
+                        <option value="bug">Signaler un bug</option>
+                        <option value="feature">Suggestion de fonctionnalite</option>
+                        <option value="account">Probleme de compte</option>
+                        <option value="billing">Question sur la facturation</option>
+                        <option value="privacy">Vie privee et donnees</option>
+                        <option value="other">Autre question</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Votre message *</label>
+                    <textarea id="message" name="message" required placeholder="Decrivez votre probleme ou question en detail..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="device">Type d'appareil (optionnel)</label>
+                    <select id="device" name="device">
+                        <option value="">Selectionnez votre appareil</option>
+                        <option value="iphone">iPhone</option>
+                        <option value="android">Android</option>
+                        <option value="ipad">iPad</option>
+                        <option value="android-tablet">Tablette Android</option>
+                    </select>
+                </div>
+
+                <input type="hidden" name="_subject" value="Support Duoly - Nouvelle demande">
+
+                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                    Envoyer ma demande
+                </button>
+            </form>
+
+            <h2>Autres moyens de contact</h2>
+
+            <div class="card">
+                <h3>Email</h3>
+                <p style="color: var(--text-secondary);">
+                    <a href="mailto:support@novalys.io">support@novalys.io</a><br>
+                    Delai de reponse : 24-48 heures
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>Reseaux sociaux</h3>
+                <p style="color: var(--text-secondary);">
+                    Suivez-nous et contactez-nous sur nos reseaux sociaux pour les dernieres actualites
+                    et conseils pour couples.
+                </p>
+            </div>
+
+            <div class="alert alert-info">
+                <strong>Conseil :</strong> Pour un traitement plus rapide de votre demande, merci d'inclure
+                le maximum d'informations : version de l'application, modele d'appareil, description detaillee
+                du probleme et captures d'ecran si possible.
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="logo-icon">💕</span>
+                    <span class="logo-text">Duoly</span>
+                    <p>Avancez ensemble, chaque jour.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Application</h4>
+                        <ul>
+                            <li><a href="index.html#features">Fonctionnalites</a></li>
+                            <li><a href="#">Telechargement</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Legal</h4>
+                        <ul>
+                            <li><a href="privacy.html">Politique de confidentialite</a></li>
+                            <li><a href="delete-account.html">Supprimer mon compte</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Support</h4>
+                        <ul>
+                            <li><a href="support.html">Centre d'aide</a></li>
+                            <li><a href="support.html#contact">Nous contacter</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Novalys. Tous droits reserves.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
