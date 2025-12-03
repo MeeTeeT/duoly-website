@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmation - Duoly</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        .icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+        }
+        .icon svg {
+            width: 40px;
+            height: 40px;
+            fill: white;
+        }
+        h1 {
+            color: #1a1a2e;
+            font-size: 24px;
+            margin-bottom: 16px;
+        }
+        p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 24px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 14px 28px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+        .success {
+            color: #10b981;
+        }
+        .error {
+            color: #ef4444;
+        }
+        .hidden {
+            display: none;
+        }
+        #status-loading, #status-success, #status-error, #status-redirect {
+            display: none;
+        }
+        #status-loading.active, #status-success.active, #status-error.active, #status-redirect.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="icon">
+            <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+        </div>
+
+        <div id="status-loading" class="active">
+            <h1>Confirmation en cours...</h1>
+            <div class="spinner"></div>
+            <p>Veuillez patienter pendant que nous confirmons votre email.</p>
+        </div>
+
+        <div id="status-success">
+            <h1 class="success">Email confirmé !</h1>
+            <p>Votre compte a été activé avec succès. Vous pouvez maintenant vous connecter dans l'application.</p>
+            <a href="#" id="open-app-btn" class="btn">Ouvrir Duoly</a>
+        </div>
+
+        <div id="status-error">
+            <h1 class="error">Erreur de confirmation</h1>
+            <p id="error-message">Une erreur s'est produite lors de la confirmation de votre email.</p>
+            <a href="/" class="btn">Retour à l'accueil</a>
+        </div>
+
+        <div id="status-redirect">
+            <h1>Redirection...</h1>
+            <div class="spinner"></div>
+            <p>Ouverture de l'application Duoly...</p>
+            <p style="margin-top: 16px; font-size: 14px;">
+                Si l'application ne s'ouvre pas automatiquement,
+                <a href="#" id="manual-open-btn" style="color: #667eea;">cliquez ici</a>.
+            </p>
+        </div>
+    </div>
+
+    <script>
+        const DEEP_LINK_SCHEME = 'io.novalys.duoly://';
+
+        function showStatus(status) {
+            document.querySelectorAll('[id^="status-"]').forEach(el => el.classList.remove('active'));
+            document.getElementById('status-' + status).classList.add('active');
+        }
+
+        function openApp(path = '') {
+            const deepLink = DEEP_LINK_SCHEME + path;
+            window.location.href = deepLink;
+        }
+
+        function handleConfirmation() {
+            const params = new URLSearchParams(window.location.search);
+            const hash = window.location.hash.substring(1);
+            const hashParams = new URLSearchParams(hash);
+
+            // Supabase envoie les tokens dans le hash ou les query params
+            const accessToken = hashParams.get('access_token') || params.get('access_token');
+            const refreshToken = hashParams.get('refresh_token') || params.get('refresh_token');
+            const type = hashParams.get('type') || params.get('type');
+            const error = hashParams.get('error') || params.get('error');
+            const errorDescription = hashParams.get('error_description') || params.get('error_description');
+
+            // Si erreur
+            if (error) {
+                showStatus('error');
+                document.getElementById('error-message').textContent =
+                    errorDescription || 'Une erreur s\'est produite.';
+                return;
+            }
+
+            // Si c'est une confirmation d'email (type=signup ou type=email_confirmation)
+            if (type === 'signup' || type === 'email_confirmation' || type === 'recovery' || accessToken) {
+                showStatus('success');
+
+                // Construire le deep link avec les tokens
+                let deepLinkPath = 'login-callback';
+                if (accessToken) {
+                    deepLinkPath += '?access_token=' + encodeURIComponent(accessToken);
+                    if (refreshToken) {
+                        deepLinkPath += '&refresh_token=' + encodeURIComponent(refreshToken);
+                    }
+                    if (type) {
+                        deepLinkPath += '&type=' + encodeURIComponent(type);
+                    }
+                }
+
+                const deepLink = DEEP_LINK_SCHEME + deepLinkPath;
+
+                document.getElementById('open-app-btn').href = deepLink;
+                document.getElementById('manual-open-btn').href = deepLink;
+
+                // Essayer d'ouvrir l'app automatiquement après un court délai
+                setTimeout(() => {
+                    showStatus('redirect');
+                    window.location.href = deepLink;
+                }, 1500);
+
+                return;
+            }
+
+            // Cas par défaut : rediriger vers l'app
+            showStatus('success');
+            document.getElementById('open-app-btn').href = DEEP_LINK_SCHEME;
+            document.getElementById('manual-open-btn').href = DEEP_LINK_SCHEME;
+        }
+
+        // Lancer la vérification au chargement
+        document.addEventListener('DOMContentLoaded', handleConfirmation);
+    </script>
+</body>
+</html>
