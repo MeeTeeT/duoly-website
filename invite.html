@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invitation Duoly</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        .icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+        }
+        .icon svg {
+            width: 40px;
+            height: 40px;
+            fill: white;
+        }
+        h1 {
+            color: #1a1a2e;
+            font-size: 24px;
+            margin-bottom: 16px;
+        }
+        .inviter-name {
+            color: #667eea;
+            font-weight: 600;
+            font-size: 20px;
+        }
+        p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 24px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .btn {
+            display: block;
+            width: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 16px 28px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: none;
+            cursor: pointer;
+            margin-bottom: 12px;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+        .btn-secondary {
+            background: #f5f5f5;
+            color: #333;
+        }
+        .btn-secondary:hover {
+            background: #e5e5e5;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .error {
+            color: #ef4444;
+        }
+        .hidden {
+            display: none;
+        }
+        .expire-info {
+            font-size: 12px;
+            color: #999;
+            margin-top: 16px;
+        }
+        .store-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+        }
+        .store-btn {
+            flex: 1;
+            padding: 12px;
+            border-radius: 8px;
+            background: #000;
+            color: white;
+            text-decoration: none;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .store-btn img {
+            width: 20px;
+            height: 20px;
+        }
+        #status-loading, #status-valid, #status-invalid {
+            display: none;
+        }
+        #status-loading.active, #status-valid.active, #status-invalid.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="icon">
+            <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+        </div>
+
+        <div id="status-loading" class="active">
+            <h1>Chargement...</h1>
+            <div class="spinner"></div>
+            <p>Vérification de l'invitation en cours...</p>
+        </div>
+
+        <div id="status-valid">
+            <h1>Invitation de</h1>
+            <p class="inviter-name" id="inviter-name"></p>
+            <p id="invite-message">souhaite se connecter avec vous sur Duoly, l'app pour avancer ensemble en couple.</p>
+
+            <button class="btn" id="open-app-btn" onclick="openApp()">
+                Ouvrir Duoly
+            </button>
+
+            <p style="color: #999; font-size: 14px; margin: 16px 0;">
+                Vous n'avez pas encore l'app ?
+            </p>
+
+            <div class="store-buttons">
+                <a href="#" class="store-btn" id="ios-store">
+                    <span>App Store</span>
+                </a>
+                <a href="#" class="store-btn" id="android-store">
+                    <span>Play Store</span>
+                </a>
+            </div>
+
+            <p class="expire-info" id="expire-info"></p>
+        </div>
+
+        <div id="status-invalid">
+            <h1 class="error">Invitation invalide</h1>
+            <p id="error-message">Cette invitation n'est plus valide ou a expiré.</p>
+            <a href="/" class="btn btn-secondary">Retour à l'accueil</a>
+        </div>
+    </div>
+
+    <script>
+        const SUPABASE_URL = 'https://qujicgavpnadmzwgcztz.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF1amljZ2F2cG5hZG16d2djenR6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ0OTQwMjgsImV4cCI6MjA4MDA3MDAyOH0.3-XVLV6t4IfwlUwSyiUGwNuIsrdxdzTT9SSCa0lkTpA';
+        const DEEP_LINK_SCHEME = 'io.novalys.duoly://';
+
+        let inviteToken = null;
+
+        function showStatus(status) {
+            document.querySelectorAll('[id^="status-"]').forEach(el => el.classList.remove('active'));
+            document.getElementById('status-' + status).classList.add('active');
+        }
+
+        function openApp() {
+            const deepLink = DEEP_LINK_SCHEME + 'invite?token=' + inviteToken;
+            window.location.href = deepLink;
+
+            // Fallback si l'app ne s'ouvre pas
+            setTimeout(() => {
+                // L'utilisateur est probablement toujours sur la page
+                // On pourrait afficher un message
+            }, 2000);
+        }
+
+        async function checkInvitation() {
+            const params = new URLSearchParams(window.location.search);
+            inviteToken = params.get('token');
+
+            if (!inviteToken) {
+                showStatus('invalid');
+                document.getElementById('error-message').textContent = 'Aucun token d\'invitation fourni.';
+                return;
+            }
+
+            try {
+                const response = await fetch(`${SUPABASE_URL}/rest/v1/rpc/get_invitation_info`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'apikey': SUPABASE_ANON_KEY,
+                        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+                    },
+                    body: JSON.stringify({ p_token: inviteToken })
+                });
+
+                const result = await response.json();
+
+                if (result && result.valid) {
+                    showStatus('valid');
+                    document.getElementById('inviter-name').textContent = result.inviter_name || 'Votre partenaire';
+
+                    if (result.expires_at) {
+                        const expiresDate = new Date(result.expires_at);
+                        const now = new Date();
+                        const daysLeft = Math.ceil((expiresDate - now) / (1000 * 60 * 60 * 24));
+                        document.getElementById('expire-info').textContent =
+                            `Cette invitation expire dans ${daysLeft} jour${daysLeft > 1 ? 's' : ''}`;
+                    }
+                } else {
+                    showStatus('invalid');
+                    document.getElementById('error-message').textContent =
+                        result.message || 'Cette invitation n\'est plus valide.';
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showStatus('invalid');
+                document.getElementById('error-message').textContent =
+                    'Erreur lors de la vérification de l\'invitation.';
+            }
+        }
+
+        // Détecter le type d'appareil pour les liens store
+        function setupStoreLinks() {
+            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+            const isAndroid = /Android/.test(navigator.userAgent);
+
+            // TODO: Remplacer par les vrais liens quand l'app sera publiée
+            document.getElementById('ios-store').href = '#';
+            document.getElementById('android-store').href = '#';
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setupStoreLinks();
+            checkInvitation();
+        });
+    </script>
+</body>
+</html>
