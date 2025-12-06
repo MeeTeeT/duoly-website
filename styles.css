@@ -2,31 +2,31 @@
 /* Theme based on the Flutter app design */
 
 :root {
-    /* Primary Colors (Warm coral-pink) */
-    --primary: #E879A7;
-    --primary-light: #F5A3C7;
-    --primary-dark: #D45A8C;
-    --primary-glow: #FFC2D9;
+    /* Primary Colors (Soft violet - Lavande) */
+    --primary: #7C6A9C;
+    --primary-light: #A08BC0;
+    --primary-dark: #5E4D7A;
+    --primary-glow: #D4C4E8;
 
     /* Background Colors */
-    --background: #FEF5F7;
-    --surface: #FDF8F9;
-    --card: #FCF5F7;
+    --background: #FAF8FC;
+    --surface: #F8F6FA;
+    --card: #F5F2F8;
 
     /* Text Colors */
-    --text-primary: #4A3540;
-    --text-secondary: #7A6570;
-    --text-muted: #A99BA3;
+    --text-primary: #3D3548;
+    --text-secondary: #6B5F78;
+    --text-muted: #9A8FA6;
     --text-on-primary: #FFFFFF;
 
     /* Accent & Secondary */
-    --secondary: #F5E0E8;
-    --accent: #F5B892;
-    --muted: #EDD8E0;
+    --secondary: #E8E0F0;
+    --accent: #D4A373;
+    --muted: #DED6E8;
 
     /* Border & Divider */
-    --border: #EDD8E0;
-    --divider: #F5E8ED;
+    --border: #DED6E8;
+    --divider: #EDE8F4;
 
     /* Status Colors */
     --success: #7BC47F;
@@ -51,10 +51,10 @@
     --radius-full: 9999px;
 
     /* Shadows */
-    --shadow-sm: 0 1px 2px rgba(74, 53, 64, 0.05);
-    --shadow-md: 0 4px 6px rgba(74, 53, 64, 0.07);
-    --shadow-lg: 0 10px 15px rgba(74, 53, 64, 0.1);
-    --shadow-xl: 0 20px 25px rgba(74, 53, 64, 0.15);
+    --shadow-sm: 0 1px 2px rgba(61, 53, 72, 0.05);
+    --shadow-md: 0 4px 6px rgba(61, 53, 72, 0.07);
+    --shadow-lg: 0 10px 15px rgba(61, 53, 72, 0.1);
+    --shadow-xl: 0 20px 25px rgba(61, 53, 72, 0.15);
 }
 
 * {
@@ -103,7 +103,7 @@ a:hover {
     top: 0;
     left: 0;
     right: 0;
-    background: rgba(254, 245, 247, 0.95);
+    background: rgba(250, 248, 252, 0.95);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--border);
     z-index: 1000;
@@ -152,7 +152,7 @@ a:hover {
 /* Hero Section */
 .hero {
     padding: 8rem 0 4rem;
-    background: linear-gradient(135deg, #FFF0F5 0%, #FCE4EC 50%, #F8BBD9 100%);
+    background: linear-gradient(135deg, #FAF8FC 0%, #E8E0F0 50%, #D4C4E8 100%);
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -565,7 +565,7 @@ a:hover {
 /* Page Header (for subpages) */
 .page-header {
     padding: 8rem 0 3rem;
-    background: linear-gradient(135deg, #FFF0F5 0%, #FCE4EC 50%, #F8BBD9 100%);
+    background: linear-gradient(135deg, #FAF8FC 0%, #E8E0F0 50%, #D4C4E8 100%);
     text-align: center;
 }
 
@@ -645,7 +645,7 @@ a:hover {
 .form-group select:focus {
     outline: none;
     border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(232, 121, 167, 0.1);
+    box-shadow: 0 0 0 3px rgba(124, 106, 156, 0.15);
 }
 
 .form-group textarea {
